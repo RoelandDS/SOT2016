@@ -1,0 +1,29 @@
+doctype html
+html(lang='en')
+  head
+    title Welcome
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+  body
+    .container.container-fluid
+      nav.navbar.navbar-default
+        .container-fluid
+          ul.nav.navbar-nav
+            li
+              a(href='/') Home
+            li
+              a(href='/newBlog') New
+
+    .container
+
+      .page-header
+        h1 Our blogs
+
+      for blog in blogs
+        .panel.panel-default
+          .panel-heading
+            h3.panel-title
+              a(href='/blog/'+blog._id) #{blog.title}
+          .panel-body
+            | #{blog.body}
+          .panel-footer
+            | #{blog.name}

@@ -1,0 +1,48 @@
+doctype html
+html(lang='en')
+  head
+    title Welcome
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+  body
+    .container.container-fluid
+      nav.navbar.navbar-default
+        ul.nav.navbar-nav
+          li
+            a(href='/') Home
+          li
+            a(href='/newBlog') New
+
+    .container.container-fluid
+
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title #{blog.title}
+        .panel-body
+          | #{blog.body}
+        .panel-footer
+          | #{blog.name}
+
+      if blog.comments && blog.comments.length > 0
+        .panel.panel-default
+          .panel-heading
+            h3.panel-title Comments
+          .panel-body
+            for comment in blog.comments
+              .panel.panel-default
+                .panel-body
+                  | #{comment.comment}
+                .panel-footer
+                  | #{comment.name}
+
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title new comment
+        .panel-body
+          form(action='/newComment/'+blog._id, method='POST', enctype="application/x-www-form-urlencoded")
+            fieldset.form-group
+              label(for='comment') Comment
+              textarea#comment.form-control(rows='5', name='comment')
+            fieldset.form-group
+              label(for='name') Name
+              input#name.form-control(type='text', name='name', placeholder='Enter name')
+            input.btn.btn-primary(type='submit', value='Submit')
